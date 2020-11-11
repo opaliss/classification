@@ -1,4 +1,4 @@
-# classification
+# Classification
 Build a decision tree classifier for discrete datasets. 
 
 # Dependencies
