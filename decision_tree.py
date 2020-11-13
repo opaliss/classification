@@ -221,9 +221,8 @@ class DecisionTreeLearner:
                         # we need to prune, replace fork with decision leaf.
                         idx = list(tree.branches.values()).index(node)
                         replace = list(tree.branches.keys())[idx]
-                        tree.branches[replace] = DecisionLeaf(result=self.dataset.values[-1][best_index(node.distribution)],
-                                                              distribution=node.distribution,
-                                                              parent=node.parent)
+                        tree.branches[replace] = DecisionLeaf(result=self.dataset.values[self.dataset.target][best_index(node.distribution)],
+                                                              distribution=node.distribution, parent=node.parent)
         return tree
 
     def chi_annotate(self, p_value):

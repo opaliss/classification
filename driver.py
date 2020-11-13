@@ -57,9 +57,4 @@ def main():
 
 
 if __name__ == '__main__':
-    """
-    # TODO:
-    2. One pruned with p-value of 0.05 and one without pruning. 
-
-    """
     main()

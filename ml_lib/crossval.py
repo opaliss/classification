@@ -77,11 +77,11 @@ def cross_validation(learner, dataset, *learner_posn_args, k=10, trials=1,
             # Prune the model, then see how well we do on validation data
             p_value = .05
             h.chi_annotate(p_value)
-            # h.prune(p_value)
-            # pruned_err = err_ratio(h.predict, fold_data, val_data)
+            h.prune(p_value)
+            pruned_err = err_ratio(h.predict, fold_data, val_data)
 
             # track fold errors and models
-            fold_errs.append(fold_err)
+            fold_errs.append(pruned_err)
             models.append(h)
 
         results = (fold_errs, models)
