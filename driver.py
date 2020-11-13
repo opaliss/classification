@@ -20,11 +20,11 @@ def main():
     # if true will run a decision tree on the mushroom dataset.
     run_mushroom = True
     # if true will run a decision tree on the zoo dataset.
-    run_zoo = False
+    run_zoo = True
     # if true will run a decision tree on the tiny_animal dataset.
     run_tiny_animal = False
     # if true will run a decision tree on the restaurant dataset.
-    run_restaurant = True
+    run_restaurant = False
 
     if run_mushroom:
         # the mushroom label is the first index of the mushroom dataset.
@@ -34,7 +34,7 @@ def main():
     if run_zoo:
         # the label is the last index of the zoo dataset.
         # target=-1 will exclude the label from zoo.inputs list of attributes.
-        data = DataSet(name="zoo", attr_names=False, target=-1, exclude=[0])
+        data = DataSet(name="zoo", attr_names=True, target=-1, exclude=[0])
 
     if run_tiny_animal:
         # the label is the last index of the tiny_animal dataset.

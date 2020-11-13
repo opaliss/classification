@@ -1,6 +1,5 @@
 Results1: Mushroom dataset.
 ** without pruning **
-
 odor Chi2=7659.727 split (3916,4208)
 y -> p is predicted
 a -> e is predicted
@@ -43,43 +42,100 @@ Mean Error =  0.0
 Standard deviation =  0.0
 
 **with pruning**
+odor Chi2=7659.727 split (3916,4208)
+n -> spore-print-color Chi2=5959.189 split (120,3408)
+    n -> e is predicted
+    b -> e is predicted
+    y -> e is predicted
+    u -> e is predicted
+    h -> e is predicted
+    w -> habitat Chi2=893.409 split (48,576)
+        d -> ring-number Chi2=679.200 split (32,8)
+            t -> e is predicted
+            n -> p is predicted
+            o -> p is predicted
+        u -> e is predicted
+        w -> e is predicted
+        m -> e is predicted
+        l -> stalk-color-below-ring Chi2=358.000 split (16,48)
+            b -> e is predicted
+            n -> e is predicted
+            y -> p is predicted
+            w -> p is predicted
+            o -> e is predicted
+            c -> e is predicted
+            e -> e is predicted
+            g -> e is predicted
+            p -> e is predicted
+        g -> e is predicted
+        p -> e is predicted
+    o -> e is predicted
+    r -> p is predicted
+    k -> e is predicted
+y -> p is predicted
+s -> p is predicted
+a -> e is predicted
+f -> p is predicted
+c -> p is predicted
+m -> p is predicted
+l -> e is predicted
+p -> p is predicted
+Mean Error =  0.0
+Standard deviation =  0.0
 
 
 Results2: Zoo.
 **without pruning **
-13 Chi2=346.122 split (8,41,1,13,20,5,4,10)
-0 -> 12 Chi2=161.521 split (0,3,0,13,0,3,0,4)
-    0 -> 14 Chi2=55.000 split (0,0,0,0,0,3,0,4)
-        tail -> shellfish is predicted
+legs Chi2=241.729 split (8,41,13,20,4,5,10)
+0 -> fins Chi2=109.505 split (0,3,13,0,0,3,4)
+    0 -> backbone Chi2=39.000 split (0,0,0,0,0,3,4)
         0 -> shellfish is predicted
         1 -> reptile is predicted
-    1 -> 3 Chi2=37.000 split (0,3,0,13,0,0,0,0)
-        eggs -> fish is predicted
+    1 -> eggs Chi2=30.000 split (0,3,13,0,0,0,0)
         0 -> mammal is predicted
         1 -> fish is predicted
-    fins -> fish is predicted
-2 -> 2 Chi2=145.485 split (0,7,0,0,20,0,0,0)
-    0 -> mammal is predicted
-    1 -> bird is predicted
-    feathers -> bird is predicted
-4 -> 1 Chi2=148.590 split (0,31,0,0,0,2,4,1)
-    0 -> 6 Chi2=100.000 split (0,0,0,0,0,2,4,1)
+2 -> milk Chi2=91.244 split (0,7,0,20,0,0,0)
+    0 -> bird is predicted
+    1 -> mammal is predicted
+4 -> hair Chi2=109.066 split (0,31,0,0,4,2,1)
+    0 -> aquatic Chi2=69.000 split (0,0,0,0,4,2,1)
         0 -> reptile is predicted
-        1 -> 8 Chi2=11.000 split (0,0,0,0,0,0,4,1)
+        1 -> toothed Chi2=9.000 split (0,0,0,0,4,0,1)
             0 -> shellfish is predicted
             1 -> amphibian is predicted
-            toothed -> amphibian is predicted
-        aquatic -> amphibian is predicted
     1 -> mammal is predicted
-    hair -> mammal is predicted
 5 -> shellfish is predicted
-6 -> 10 Chi2=188.080 split (8,0,0,0,0,0,0,2)
-    0 -> shellfish is predicted
-    1 -> insect is predicted
-    breathes -> insect is predicted
+6 -> aquatic Chi2=111.200 split (8,0,0,0,0,0,2)
+    0 -> insect is predicted
+    1 -> shellfish is predicted
 8 -> shellfish is predicted
-legs -> type is predicted
-Mean Error =  0.059999999999999984
-Standard deviation =  0.06992058987801009
+Mean Error =  0.029999999999999992
+Standard deviation =  0.04830458915396478
 
 ** with pruning**
+legs Chi2=241.729 split (4,8,10,5,20,41,13)
+0 -> fins Chi2=109.505 split (0,0,4,3,0,3,13)
+    0 -> tail Chi2=39.000 split (0,0,4,3,0,0,0)
+        0 -> shellfish is predicted
+        1 -> reptile is predicted
+    1 -> breathes Chi2=30.000 split (0,0,0,0,0,3,13)
+        0 -> fish is predicted
+        1 -> mammal is predicted
+2 -> milk Chi2=91.244 split (0,0,0,0,20,7,0)
+    0 -> bird is predicted
+    1 -> mammal is predicted
+4 -> milk Chi2=109.066 split (4,0,1,2,0,31,0)
+    0 -> aquatic Chi2=69.000 split (4,0,1,2,0,0,0)
+        0 -> reptile is predicted
+        1 -> toothed Chi2=9.000 split (4,0,1,0,0,0,0)
+            0 -> shellfish is predicted
+            1 -> amphibian is predicted
+    1 -> mammal is predicted
+5 -> shellfish is predicted
+6 -> aquatic Chi2=111.200 split (0,8,2,0,0,0,0)
+    0 -> insect is predicted
+    1 -> shellfish is predicted
+8 -> shellfish is predicted
+Mean Error =  0.039999999999999994
+Standard deviation =  0.05163977794943221
+
