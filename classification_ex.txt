@@ -1,0 +1,51 @@
+5 Chi2=14193.181 split (3530,1,3782)
+a -> e is predicted
+y -> p is predicted
+odor -> edible is predicted
+p -> p is predicted
+s -> p is predicted
+n -> 20 Chi2=1964.684 split (112,0,3073)
+    h -> e is predicted
+    w -> 22 Chi2=350.223 split (45,0,518)
+        w -> e is predicted
+        habitat -> e is predicted
+        p -> e is predicted
+        m -> e is predicted
+        l -> 21 Chi2=58.000 split (14,0,44)
+            a -> e is predicted
+            y -> e is predicted
+            s -> e is predicted
+            n -> e is predicted
+            population -> e is predicted
+            c -> p is predicted
+            v -> e is predicted
+        g -> e is predicted
+        d -> 11 Chi2=37.000 split (31,0,6)
+            stalk-root -> p is predicted
+            b -> e is predicted
+            c -> p is predicted
+            ? -> p is predicted
+            r -> p is predicted
+            e -> p is predicted
+        u -> e is predicted
+    o -> e is predicted
+    y -> e is predicted
+    spore-print-color -> e is 
+
+
+
+
+Pat Chi2=6.667 split (6,6)
+None -> No is predicted
+Some -> Yes is predicted
+Full -> Res Chi2=2.000 split (4,2)
+    No -> Est Chi2=3.250 split (2,2)
+        0-10 -> No is predicted
+        >60 -> No is predicted
+        10-30 -> Yes is predicted
+        30-60 -> Bar Chi2=2.000 split (1,1)
+            No -> No is predicted
+            Yes -> Yes is predicted
+    Yes -> No is predicted
+Mean Error =  0.4
+Standard deviation =  0.5163977794943222

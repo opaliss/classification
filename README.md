@@ -10,7 +10,7 @@ Build a decision tree classifier for discrete datasets.
 1. Mushrooms - decide if a mushroom is edible or poisonous. 
 2. Restaurant - decide if the customer will eat at a restaurant based on his habits. 
 3. Animals - decide if an animal is a mammal or not. 
-4. Zoo - classify the animals in groups. 
+4. Zoo - classify the animals in the following groups: 'shellfish', 'amphibian', 'bird', 'insect', 'mammal', 'fish', 'reptile'. 
 5. MNIST Fashion - classify the fashion items. 
 
 * Note: these datasets can be found in `ml_lib/aima_data`. 

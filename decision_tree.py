@@ -16,7 +16,7 @@ from ml_lib.decision_tree_support import DecisionLeaf, DecisionFork
 
 class DecisionTreeLearner:
     """DecisionTreeLearner - Class to learn decision trees and predict classes
-    on novel exmaples
+    on novel examples.
     """
 
     # Typedef for method chi2test result value (see chi2test for details)
@@ -45,10 +45,8 @@ class DecisionTreeLearner:
 
         self.debug = debug
 
-
-
     def __str__(self):
-        "str - Create a string representation of the tree"
+        """str - Create a string representation of the tree"""
         if self.tree is None:
             result = "untrained decision tree"
         else:
@@ -69,8 +67,32 @@ class DecisionTreeLearner:
 
         # Hints:  See pseudocode from class and leverage classes
         # DecisionFork and DecisionLeaf
+        if len(examples) == 0:
+            # pick whatever parent had most of.
+            return DecisionLeaf(result=self.plurality_value(examples=parent_examples),
+                                distribution=self.count_targets(examples=parent_examples),
+                                parent=parent)
 
-        raise NotImplementedError
+        elif self.all_same_class(examples=examples):
+            return DecisionLeaf(result=examples[0][self.dataset.target],
+                                distribution=self.count_targets(examples=examples),
+                                parent=parent)
+
+        elif len(attrs) == 0:  # no more questions to ask.
+            return DecisionLeaf(result=self.plurality_value(examples=examples),
+                                distribution=self.count_targets(examples=examples),
+                                parent=parent)
+
+        else:
+            a = self.choose_attribute(attrs=attrs, examples=examples)
+            tree = DecisionFork(attr=a, distribution=self.count_targets(examples=examples),
+                                attr_name=self.dataset.attr_names[a], parent=parent)
+            for (v, exs) in self.split_by(attr=a, examples=examples):
+                subtree = self.decision_tree_learning(examples=exs, attrs=remove_all(a, attrs),
+                                                      parent=tree,
+                                                      parent_examples=examples)
+                tree.add(val=v, subtree=subtree)
+        return tree
 
     def plurality_value(self, examples):
         """
@@ -92,7 +114,7 @@ class DecisionTreeLearner:
         (self.dataset.values[self.dataset.target])
         """
 
-        tidx = self.dataset.target # index of target attribute
+        tidx = self.dataset.target  # index of target attribute
         target_values = self.dataset.values[tidx]  # Class labels across dataset
 
         # Count the examples associated with each target
@@ -104,7 +126,6 @@ class DecisionTreeLearner:
 
         return counts
 
-
     def all_same_class(self, examples):
         """Are all these examples in the same target class?"""
         class0 = examples[0][self.dataset.target]
@@ -112,14 +133,18 @@ class DecisionTreeLearner:
 
     def choose_attribute(self, attrs, examples):
         """Choose the attribute with the highest information gain."""
-
-        # Returns the attribute index
-        raise NotImplementedError
+        return argmax_random_tie(attrs, lambda a: self.information_gain(attr=a, examples=examples))
 
     def information_gain(self, attr, examples):
         """Return the expected reduction in entropy for examples from splitting by attr."""
+        N = len(examples)  # number of total examples.
 
-        raise NotImplementedError
+        # compute the entropy.
+        entropy = self.information_content(class_counts=self.count_targets(examples=examples))
+        # compute the reminder.
+        remainder = sum((len(ex) / N) * self.information_content(class_counts=self.count_targets(examples=ex))
+                        for (v, ex) in self.split_by(attr, examples))
+        return entropy - remainder
 
     def split_by(self, attr, examples):
         """split_by(attr, examples)
@@ -128,7 +153,7 @@ class DecisionTreeLearner:
         return [(v, [e for e in examples if e[attr] == v]) for v in self.dataset.values[attr]]
 
     def predict(self, x):
-        "predict - Determine the class, returns class index"
+        """predict - Determine the class, returns class index"""
         return self.tree(x)  # Evaluate the tree on example x
 
     def __repr__(self):
@@ -137,17 +162,18 @@ class DecisionTreeLearner:
     @classmethod
     def information_content(cls, class_counts):
         """info = information_content(class_counts)
-        Given a list of counts associated with classes
-        compute the empirical information associated
-        with each class.
+        Given an iterable of counts associated with classes
+        compute the empirical entropy.
 
-        Returns tuple where info(i) is the information associated wth
-        having class_counts(i) instances of class i.
+        Example: 3 class problem where we have 3 examples of class 0,
+        2 examples of class 1, and 0 examples of class 2:
+        information_content((3, 2, 0)) returns ~ .971
+
+        Hint: Ignore zero counts; function normalize may be helpful
         """
-
-        # Hint: remember discrete values use log2 when computing probability
-
-        raise NotImplementedError
+        # Hint: remember discrete values use log2 when computing probability.
+        probabilities = normalize(remove_all(0, class_counts))
+        return -sum(p * np.log2(p) for p in probabilities)
 
     def information_per_class(self, examples):
         """information_per_class(examples)
@@ -157,8 +183,12 @@ class DecisionTreeLearner:
         """
         # Hint:  list of classes can be obtained from
         # self.data.set.values[self.dataset.target]
-
-        raise NotImplementedError
+        # TODO: Understand the purpose of this function.
+        probabilities = normalize(self.count_targets(examples=examples))
+        info_per_class = []
+        for p in probabilities:
+            info_per_class.append(1 / np.log2(p))
+        return info_per_class
 
     def prune(self, p_value):
         """Prune leaves of a tree when the hypothesis that the distribution
@@ -175,7 +205,26 @@ class DecisionTreeLearner:
         # Hint - Easiest to do with a recursive auxiliary function, that takes
         # a parent argument, but you are free to implement as you see fit.
         # e.g. self.prune_aux(p_value, self.tree, None)
-        raise NotImplementedError
+        # post-order traversal.
+        self.tree = self.prune_aux(p_value=p_value, tree=self.tree)
+
+    def prune_aux(self, tree, p_value):
+        """ implement post-order traversal. """
+        if isinstance(tree, DecisionFork):
+            for child in tree.branches.values():
+                if isinstance(child, DecisionFork):
+                    # potential node to prune.
+                    node = self.prune_aux(tree=child, p_value=p_value)
+                    # check it's chi2 value and similarity.
+                    chi_res = self.chi2test(p_value=p_value, fork=node)
+                    if chi_res.similar:
+                        # we need to prune, replace fork with decision leaf.
+                        idx = list(tree.branches.values()).index(node)
+                        replace = list(tree.branches.keys())[idx]
+                        tree.branches[replace] = DecisionLeaf(result=self.dataset.values[-1][best_index(node.distribution)],
+                                                              distribution=node.distribution,
+                                                              parent=node.parent)
+        return tree
 
     def chi_annotate(self, p_value):
         """chi_annotate(p_value)
@@ -231,18 +280,38 @@ class DecisionTreeLearner:
         # Don't forget, scipy has an inverse cdf for chi^2
         # scipy.stats.chi2.ppf
 
-        raise NotImplementedError
+        delta = 0  # initialize delta= chi2 statistic.
+
+        # compute the parent example distribution.
+        if fork.parent is None:
+            parent_dist = self.count_targets(self.dataset.examples)
+        else:
+            parent_dist = fork.parent.distribution
+
+        # loop over the number of children.
+        for child in fork.branches.values():
+            if isinstance(child, DecisionLeaf) or isinstance(child, DecisionFork):
+                child_dist = child.distribution
+
+                # loop over the number of classes.
+                for ii in range(len(parent_dist)):
+                    p_hat = parent_dist[ii] * (sum(child_dist) / sum(parent_dist))
+                    if p_hat != 0:
+                        delta += ((child_dist[ii] - p_hat) ** 2) / p_hat
+
+        # compute the inverse delta for p=0.95 with dof = num_class -1.
+        delta_p = scipy.stats.chi2.ppf(1 - p_value, self.dof)
+
+        # check against the threshold value.
+        if delta < delta_p:
+            similar = True
+        else:
+            similar = False
+
+        # initialize named tuple with "value" and "similar" attributes.
+        chi2result = namedtuple('chi2result', ['value', 'similar'])
+        return chi2result(delta, similar)
 
     def __str__(self):
         """str - String representation of the tree"""
         return str(self.tree)
-
-
-
-
-
-
-
-
-
-

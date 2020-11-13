@@ -50,7 +50,7 @@ def cross_validation(learner, dataset, *learner_posn_args, k=10, trials=1,
         trial_errs = 0
         results = []
         for t in range(trials):
-            results.append(cross_validation(learner, dataset, size, k))
+            results.append(cross_validation(learner, dataset, 1, k))
 
     else:
         fold_errs = []  # error per k folds
@@ -78,7 +78,7 @@ def cross_validation(learner, dataset, *learner_posn_args, k=10, trials=1,
             p_value = .05
             h.chi_annotate(p_value)
             h.prune(p_value)
-            pruned_err = err_ratio(h.predict, fold_data, val_data)
+            # pruned_err = err_ratio(h.predict, fold_data, val_data)
 
             # track fold errors and models
             fold_errs.append(fold_err)

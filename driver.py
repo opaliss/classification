@@ -17,17 +17,49 @@ def main():
     Machine learning with decision trees.
     Runs cross validation on data sets and reports results/trees
     """
-    raise NotImplementedError
+    # if true will run a decision tree on the mushroom dataset.
+    run_mushroom = True
+    # if true will run a decision tree on the zoo dataset.
+    run_zoo = False
+    # if true will run a decision tree on the tiny_animal dataset.
+    run_tiny_animal = False
+    # if true will run a decision tree on the restaurant dataset.
+    run_restaurant = True
+
+    if run_mushroom:
+        # the mushroom label is the first index of the mushroom dataset.
+        # target=0 will exclude the label from mushroom.inputs list of attributes.
+        data = DataSet(name="mushrooms", attr_names=True, target=0, exclude=[0])
+
+    if run_zoo:
+        # the label is the last index of the zoo dataset.
+        # target=-1 will exclude the label from zoo.inputs list of attributes.
+        data = DataSet(name="zoo", attr_names=False, target=-1, exclude=[0])
+
+    if run_tiny_animal:
+        # the label is the last index of the tiny_animal dataset.
+        # target=-1 will exclude the label from tiny_animals_set.inputs list of attributes.
+        data = DataSet(name="tiny_animal_set", attr_names=True, target=-1)
+
+    if run_restaurant:
+        # the label is the last index of the restaurant dataset.
+        # target=-1 will exclude the label from tiny_animals_set.inputs list of attributes.
+        data = DataSet(name="restaurant", attr_names=True, target=-1)
+
+    tree = DecisionTreeLearner(dataset=data, debug=True, p_value=0.05)
+    tree.chi_annotate(p_value=0.05)
+    print(tree)
+
+    results = cross_validation(learner=DecisionTreeLearner, dataset=data, p_value=0.05)
+
+    print("Mean Error = ", mean(results[0]))
+    print("Standard deviation = ", stdev(results[0]))
 
 
 if __name__ == '__main__':
     """
     # TODO:
-    1. Run a decision tree on the Zoo and Mushroom dataset. 
     2. One pruned with p-value of 0.05 and one without pruning. 
-    3. provide a cross-validation class to conduct two 10-fold-cross-validation. 
-    4. The driver needs to print out the mean error and standard deviation. 
-    5. Print out the decision tree + call chi_annotate on the tree before you print it so that you can see the chi2 
-    statistic for each decision node. 
+
     """
     main()

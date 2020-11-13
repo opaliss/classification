@@ -9,7 +9,7 @@ class DecisionFork:
     indent = 4  # Tab size for printing
 
     def __init__(self, attr, distribution, attr_name=None, default_child=None,
-                 branches=None, parent = None):
+                 branches=None, parent=None):
         """DecisionFork constructor
         A branch in the decision tree.
         attr - Attribute index that we are splitting on
