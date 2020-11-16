@@ -81,7 +81,7 @@ def cross_validation(learner, dataset, *learner_posn_args, k=10, trials=1,
             pruned_err = err_ratio(h.predict, fold_data, val_data)
 
             # track fold errors and models
-            fold_errs.append(pruned_err)
+            fold_errs.append(fold_err)
             models.append(h)
 
         results = (fold_errs, models)

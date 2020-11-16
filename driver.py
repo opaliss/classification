@@ -18,7 +18,7 @@ def main():
     Runs cross validation on data sets and reports results/trees
     """
     # if true will run a decision tree on the mushroom dataset.
-    run_mushroom = True
+    run_mushroom = False
     # if true will run a decision tree on the zoo dataset.
     run_zoo = True
     # if true will run a decision tree on the tiny_animal dataset.

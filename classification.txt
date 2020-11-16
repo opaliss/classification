@@ -1,141 +1,138 @@
 Results1: Mushroom dataset.
 ** without pruning **
 odor Chi2=7659.727 split (3916,4208)
-y -> p is predicted
-a -> e is predicted
-m -> p is predicted
-l -> e is predicted
-s -> p is predicted
-p -> p is predicted
-n -> spore-print-color Chi2=5959.189 split (120,3408)
-    y -> e is predicted
-    h -> e is predicted
-    o -> e is predicted
-    w -> habitat Chi2=893.409 split (48,576)
-        g -> e is predicted
-        u -> e is predicted
-        w -> e is predicted
+n -> spore-print-color Chi2=2179.486 split (120,3408)
+    n -> e is predicted
+    w -> habitat Chi2=364.867 split (48,576)
         m -> e is predicted
-        l -> population Chi2=304.000 split (16,48)
-            y -> e is predicted
-            a -> e is predicted
-            s -> e is predicted
-            n -> e is predicted
-            v -> e is predicted
-            c -> p is predicted
-        p -> e is predicted
-        d -> population Chi2=1562.800 split (32,8)
-            y -> e is predicted
-            a -> p is predicted
-            s -> p is predicted
+        d -> population Chi2=40.000 split (32,8)
             n -> p is predicted
             v -> p is predicted
             c -> p is predicted
-    u -> e is predicted
-    r -> p is predicted
-    k -> e is predicted
-    n -> e is predicted
+            s -> p is predicted
+            a -> p is predicted
+            y -> e is predicted
+        w -> e is predicted
+        p -> e is predicted
+        u -> e is predicted
+        g -> e is predicted
+        l -> stalk-color-below-ring Chi2=64.000 split (16,48)
+            n -> e is predicted
+            c -> e is predicted
+            w -> p is predicted
+            y -> p is predicted
+            o -> e is predicted
+            p -> e is predicted
+            e -> e is predicted
+            g -> e is predicted
+            b -> e is predicted
     b -> e is predicted
-c -> p is predicted
+    r -> p is predicted
+    o -> e is predicted
+    h -> e is predicted
+    u -> e is predicted
+    y -> e is predicted
+    k -> e is predicted
+m -> p is predicted
 f -> p is predicted
+c -> p is predicted
+s -> p is predicted
+a -> e is predicted
+p -> p is predicted
+y -> p is predicted
+l -> e is predicted
 Mean Error =  0.0
 Standard deviation =  0.0
 
 **with pruning**
-odor Chi2=7659.727 split (3916,4208)
-n -> spore-print-color Chi2=5959.189 split (120,3408)
-    n -> e is predicted
-    b -> e is predicted
-    y -> e is predicted
-    u -> e is predicted
-    h -> e is predicted
-    w -> habitat Chi2=893.409 split (48,576)
-        d -> ring-number Chi2=679.200 split (32,8)
-            t -> e is predicted
-            n -> p is predicted
-            o -> p is predicted
-        u -> e is predicted
-        w -> e is predicted
-        m -> e is predicted
-        l -> stalk-color-below-ring Chi2=358.000 split (16,48)
-            b -> e is predicted
-            n -> e is predicted
-            y -> p is predicted
-            w -> p is predicted
-            o -> e is predicted
-            c -> e is predicted
-            e -> e is predicted
-            g -> e is predicted
-            p -> e is predicted
-        g -> e is predicted
-        p -> e is predicted
-    o -> e is predicted
-    r -> p is predicted
-    k -> e is predicted
-y -> p is predicted
-s -> p is predicted
-a -> e is predicted
-f -> p is predicted
+odor Chi2=6894.301 split (3536,3776)
 c -> p is predicted
 m -> p is predicted
-l -> e is predicted
+f -> p is predicted
+s -> p is predicted
 p -> p is predicted
+a -> e is predicted
+l -> e is predicted
+y -> p is predicted
+n -> spore-print-color Chi2=2012.123 split (108,3055)
+    b -> e is predicted
+    o -> e is predicted
+    h -> e is predicted
+    k -> e is predicted
+    w -> habitat Chi2=299.411 split (41,511)
+        d -> ring-type Chi2=34.000 split (26,8)
+            e -> p is predicted
+            f -> p is predicted
+            p -> e is predicted
+            l -> p is predicted
+            n -> p is predicted
+        m -> e is predicted
+        w -> e is predicted
+        g -> e is predicted
+        p -> e is predicted
+        u -> e is predicted
+        l -> stalk-color-below-ring Chi2=60.000 split (15,45)
+            e -> e is predicted
+            c -> e is predicted
+            b -> e is predicted
+            o -> e is predicted
+            w -> p is predicted
+            g -> e is predicted
+            p -> e is predicted
+            y -> p is predicted
+            n -> e is predicted
+    u -> e is predicted
+    r -> p is predicted
+    y -> e is predicted
+    n -> e is predicted
 Mean Error =  0.0
 Standard deviation =  0.0
 
 
 Results2: Zoo.
 **without pruning **
-legs Chi2=241.729 split (8,41,13,20,4,5,10)
-0 -> fins Chi2=109.505 split (0,3,13,0,0,3,4)
-    0 -> backbone Chi2=39.000 split (0,0,0,0,0,3,4)
+legs Chi2=241.729 split (41,10,13,5,4,20,8)
+0 -> fins Chi2=23.000 split (3,4,13,3,0,0,0)
+    0 -> toothed Chi2=7.000 split (0,4,0,3,0,0,0)
         0 -> shellfish is predicted
         1 -> reptile is predicted
-    1 -> eggs Chi2=30.000 split (0,3,13,0,0,0,0)
+    1 -> eggs Chi2=16.000 split (3,0,13,0,0,0,0)
         0 -> mammal is predicted
         1 -> fish is predicted
-2 -> milk Chi2=91.244 split (0,7,0,20,0,0,0)
+2 -> toothed Chi2=27.000 split (7,0,0,0,0,20,0)
     0 -> bird is predicted
     1 -> mammal is predicted
-4 -> hair Chi2=109.066 split (0,31,0,0,4,2,1)
-    0 -> aquatic Chi2=69.000 split (0,0,0,0,4,2,1)
+4 -> hair Chi2=38.000 split (31,1,0,2,4,0,0)
+    0 -> aquatic Chi2=7.000 split (0,1,0,2,4,0,0)
         0 -> reptile is predicted
-        1 -> toothed Chi2=9.000 split (0,0,0,0,4,0,1)
+        1 -> backbone Chi2=5.000 split (0,1,0,0,4,0,0)
             0 -> shellfish is predicted
             1 -> amphibian is predicted
     1 -> mammal is predicted
 5 -> shellfish is predicted
-6 -> aquatic Chi2=111.200 split (8,0,0,0,0,0,2)
-    0 -> insect is predicted
-    1 -> shellfish is predicted
-8 -> shellfish is predicted
-Mean Error =  0.029999999999999992
-Standard deviation =  0.04830458915396478
-
-** with pruning**
-legs Chi2=241.729 split (4,8,10,5,20,41,13)
-0 -> fins Chi2=109.505 split (0,0,4,3,0,3,13)
-    0 -> tail Chi2=39.000 split (0,0,4,3,0,0,0)
-        0 -> shellfish is predicted
-        1 -> reptile is predicted
-    1 -> breathes Chi2=30.000 split (0,0,0,0,0,3,13)
-        0 -> fish is predicted
-        1 -> mammal is predicted
-2 -> milk Chi2=91.244 split (0,0,0,0,20,7,0)
-    0 -> bird is predicted
-    1 -> mammal is predicted
-4 -> milk Chi2=109.066 split (4,0,1,2,0,31,0)
-    0 -> aquatic Chi2=69.000 split (4,0,1,2,0,0,0)
-        0 -> reptile is predicted
-        1 -> toothed Chi2=9.000 split (4,0,1,0,0,0,0)
-            0 -> shellfish is predicted
-            1 -> amphibian is predicted
-    1 -> mammal is predicted
-5 -> shellfish is predicted
-6 -> aquatic Chi2=111.200 split (0,8,2,0,0,0,0)
+6 -> aquatic Chi2=10.000 split (0,2,0,0,0,0,8)
     0 -> insect is predicted
     1 -> shellfish is predicted
 8 -> shellfish is predicted
 Mean Error =  0.039999999999999994
 Standard deviation =  0.05163977794943221
+
+** with pruning**
+legs Chi2=250.780 split (12,5,3,8,18,39,6)
+0 -> fins Chi2=21.000 split (12,3,0,0,0,3,3)
+    0 -> reptile is predicted
+    1 -> eggs Chi2=15.000 split (12,0,0,0,0,3,0)
+        0 -> mammal is predicted
+        1 -> fish is predicted
+2 -> hair Chi2=25.000 split (0,0,0,0,18,7,0)
+    0 -> bird is predicted
+    1 -> mammal is predicted
+4 -> hair Chi2=34.000 split (0,2,3,0,0,29,0)
+    0 -> amphibian is predicted
+    1 -> mammal is predicted
+5 -> shellfish is predicted
+6 -> insect is predicted
+8 -> shellfish is predicted
+Mean Error =  0.11
+Standard deviation =  0.1370320319406298
 
