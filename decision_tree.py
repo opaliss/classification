@@ -221,8 +221,10 @@ class DecisionTreeLearner:
                         # we need to prune, replace fork with decision leaf.
                         idx = list(tree.branches.values()).index(node)
                         replace = list(tree.branches.keys())[idx]
-                        tree.branches[replace] = DecisionLeaf(result=self.dataset.values[self.dataset.target][best_index(node.distribution)],
-                                                              distribution=node.distribution, parent=node.parent)
+                        result = self.dataset.values[self.dataset.target][best_index(node.distribution)]
+                        tree.branches[replace] = DecisionLeaf(result=result,
+                                                              distribution=node.distribution,
+                                                              parent=node.parent)
         return tree
 
     def chi_annotate(self, p_value):
@@ -282,10 +284,7 @@ class DecisionTreeLearner:
         delta = 0  # initialize delta= chi2 statistic.
 
         # compute the parent example distribution.
-        if fork.parent is None:
-            parent_dist = self.count_targets(self.dataset.examples)
-        else:
-            parent_dist = fork.parent.distribution
+        parent_dist = fork.distribution
 
         # loop over the number of children.
         for child in fork.branches.values():
